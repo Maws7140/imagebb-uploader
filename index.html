@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Uploader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -11,36 +12,63 @@
             padding: 0;
         }
 
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
+            font-family: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #23243a 0%, #1a1a2e 100%);
             color: #eee;
             min-height: 100vh;
             padding: 2rem;
         }
 
+
         .container {
             max-width: 800px;
             margin: 0 auto;
+            background: rgba(30, 34, 60, 0.7);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 2.5rem 2rem 2rem 2rem;
+            position: relative;
         }
 
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        .logo-emoji {
+            display: none;
+        }
         h1 {
             text-align: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
             color: #89ddff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
+
 
         .subtitle {
             text-align: center;
-            color: #888;
-            margin-bottom: 2rem;
+            color: #b0b8d1;
+            margin-bottom: 2.2rem;
+            font-size: 1.1rem;
         }
 
+
         .api-key-section {
-            background: #16213e;
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: rgba(22, 33, 62, 0.85);
+            border-radius: 16px;
+            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
             margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
         }
 
         .api-key-section label {
@@ -79,6 +107,7 @@
             color: #89ddff;
         }
 
+
         .btn-toggle {
             padding: 0.75rem;
             background: #0f3460;
@@ -86,22 +115,25 @@
             border-radius: 8px;
             color: #eee;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            transition: background 0.2s;
         }
 
         .btn-toggle:hover {
             background: #1a4a7a;
         }
 
+
         .drop-zone {
             border: 3px dashed #0f3460;
-            border-radius: 16px;
-            padding: 3rem;
+            border-radius: 20px;
+            padding: 3rem 2rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #16213e;
+            background: rgba(22, 33, 62, 0.85);
             margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
         }
 
         .drop-zone:hover, .drop-zone.dragover {
@@ -109,9 +141,11 @@
             background: #1a2744;
         }
 
+
         .drop-zone-icon {
-            font-size: 4rem;
+            font-size: 4.2rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 8px #0f3460aa);
         }
 
         .drop-zone-text {
@@ -159,22 +193,28 @@
             margin: 0 auto 1rem;
         }
 
+
         .btn {
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: 10px;
+            font-size: 1.05rem;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-family: 'Montserrat', 'Inter', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
         }
+
 
         .btn-primary {
-            background: #e94560;
+            background: linear-gradient(90deg, #e94560 60%, #ff6b6b 100%);
             color: white;
+            box-shadow: 0 2px 8px 0 #e9456033;
         }
-
         .btn-primary:hover {
-            background: #ff6b6b;
+            background: linear-gradient(90deg, #ff6b6b 60%, #e94560 100%);
+            filter: brightness(1.08);
         }
 
         .btn-primary:disabled {
@@ -245,6 +285,7 @@
             border-color: #89ddff;
         }
 
+
         .btn-copy {
             padding: 0.75rem 1rem;
             background: #0f3460;
@@ -254,14 +295,17 @@
             cursor: pointer;
             transition: all 0.2s ease;
             min-width: 70px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
         }
-
         .btn-copy:hover {
             background: #1a4a7a;
         }
-
         .btn-copy.copied {
             background: #2ecc71;
+            color: #fff;
         }
 
         .uploaded-image {
@@ -292,10 +336,12 @@
             color: #ff6b6b;
         }
 
+
         .history-section {
-            background: #16213e;
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: rgba(22, 33, 62, 0.85);
+            border-radius: 16px;
+            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+            box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
         }
 
         .history-header {
@@ -417,15 +463,16 @@
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>📸 Image Uploader</h1>
-        <p class="subtitle">Upload or paste images to get shareable links</p>
+        <div class="logo"><h1>Image Uploader</h1></div>
+        <p class="subtitle">Upload or paste images to get <b>shareable links</b> instantly!</p>
 
         <div class="api-key-section">
             <label for="apiKey">ImgBB API Key</label>
             <div class="api-key-row">
                 <input type="password" id="apiKey" placeholder="Enter your ImgBB API key">
-                <button class="btn-toggle" onclick="toggleKeyVisibility()" id="toggleBtn">👁️</button>
+                <button class="btn-toggle" onclick="toggleKeyVisibility()" id="toggleBtn" title="Show/Hide API Key">Show</button>
             </div>
             <small>
                 Get a free key: <a href="https://api.imgbb.com/" target="_blank">api.imgbb.com</a> 
@@ -448,9 +495,9 @@
         </div>
 
         <div class="drop-zone" id="dropZone">
-            <div class="drop-zone-icon">🖼️</div>
-            <div class="drop-zone-text">Drop image here or click to select</div>
-            <div class="drop-zone-hint">You can also paste an image with Ctrl+V / Cmd+V</div>
+            <div class="drop-zone-icon"><!-- icon removed --></div>
+            <div class="drop-zone-text"><b>Drop image here</b> or <span style="color:#89ddff;">click to select</span></div>
+            <div class="drop-zone-hint">Paste an image with <b>Ctrl+V</b> / <b>Cmd+V</b></div>
             <input type="file" id="fileInput" accept="image/*">
         </div>
 
@@ -459,7 +506,7 @@
         <div class="preview-section" id="previewSection">
             <div class="preview-header">
                 <h3>Preview</h3>
-                <button class="btn btn-secondary" onclick="clearPreview()">Clear</button>
+                <button class="btn btn-secondary" onclick="clearPreview()" title="Clear preview">Clear</button>
             </div>
             <img id="previewImage" class="preview-image" alt="Preview">
             <div class="btn-group">
@@ -470,8 +517,7 @@
         </div>
 
         <div class="result-section" id="resultSection">
-            <h3>✅ Upload Complete</h3>
-            
+            <h3>Upload Complete</h3>
             <div class="link-group">
                 <label>Direct Link (Full Size)</label>
                 <div class="link-row">
@@ -479,7 +525,6 @@
                     <button class="btn-copy" onclick="copyLink('directLink', this)">Copy</button>
                 </div>
             </div>
-
             <div class="link-group">
                 <label>Viewer Page</label>
                 <div class="link-row">
@@ -487,7 +532,6 @@
                     <button class="btn-copy" onclick="copyLink('pageLink', this)">Copy</button>
                 </div>
             </div>
-
             <div class="link-group">
                 <label>Markdown</label>
                 <div class="link-row">
@@ -495,7 +539,6 @@
                     <button class="btn-copy" onclick="copyLink('markdownLink', this)">Copy</button>
                 </div>
             </div>
-
             <div class="link-group">
                 <label>HTML</label>
                 <div class="link-row">
@@ -503,14 +546,13 @@
                     <button class="btn-copy" onclick="copyLink('htmlLink', this)">Copy</button>
                 </div>
             </div>
-
             <img id="uploadedImage" class="uploaded-image" alt="Uploaded">
         </div>
 
         <div class="history-section">
             <div class="history-header">
-                <h3>📋 Recent Uploads</h3>
-                <button class="btn-clear" onclick="clearHistory()">Clear History</button>
+                <h3>Recent Uploads</h3>
+                <button class="btn-clear" onclick="clearHistory()" title="Clear all history">Clear History</button>
             </div>
             <div class="history-list" id="historyList">
                 <div class="empty-history">No uploads yet</div>
